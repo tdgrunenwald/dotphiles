@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+_lock() {
+	# lock the screen
+	i3lock-fancy
+}
+
+_shutdown() {
+	systemctl poweroff
+}
+
+_hibernate() {
+	# suspend to disk
+	systemctl hibernate
+}
+
+_sleep() {
+	# suspend to memory
+	systemctl suspend
+}
+
+_reboot() {
+	# reboot the system
+	systemctl reboot
+}
+
+case $1 in
+	lock)
+		_lock
+		;;
+	logout)
+		i3-msg exit
+		;;
+	suspend)
+		_lock && _sleep
+		;;
+	hibernate)
+		_lock && _hibernate
+		;;
+	reboot)
+		_reboot
+		;;
+	shutdown)
+		_shutdown
+		;;
+	*)
+		echo "Usage: $0 [lock|logout|suspend|hibernate|reboot|shutdown]"
+		exit 2
+esac
+exit 0

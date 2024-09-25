@@ -1,0 +1,51 @@
+[gpg]
+	format = ssh
+
+[user]
+	signingkey = /home/tyler/.ssh/id_ed25519.pub
+	email = tgrunenwald@punchthrough.com
+	name = Tyler Grunenwald
+
+[alias]
+    a = add
+    ap = a -p
+    ai = a -i
+    au = a -u
+    anw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
+    b = branch
+    bl = branch -l
+    bd = branch -D
+    s = status -bs
+    sm = submodule
+    smi = submodule init
+    smu = submodule update
+    l = log --oneline
+    lt = l -10
+    ltt = l -20
+    ll = log
+    ohshitlist = l -g #<- show reflog in git log output for recovering bad situations
+    co = checkout
+    cob = co -b
+    r = remote
+    ra = r add
+    rv = r -v
+    c = commit
+    cm = commit -m
+    d = diff
+    di = d --ignore-all-space
+    ds = d --staged
+    dsi = ds --ignore-all-space
+    wt = worktree
+    clone-bare = !sh $HOME/.local/bin/git-clone-bare.sh
+
+[push]
+	default = current
+
+[core]
+	editor = nvim
+
+[pull]
+	rebase = true
+
+[init]
+	defaultBranch = main

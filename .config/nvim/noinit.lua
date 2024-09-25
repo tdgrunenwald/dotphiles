@@ -1,0 +1,1 @@
+-- Empty config for initializing without config or plugins

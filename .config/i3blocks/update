@@ -1,0 +1,12 @@
+#!/bin/sh
+# Tyler Grunenwald | github.com/tdgrunenwald
+# Going to use a runit service to periodically download updates
+# This status script just reports if there are any available to install
+ICON="+"
+#NPKGS=`xbps-install -un | wc -l`	# Count the available updates
+NPKGS=`apt list --upgradable -qq 2>/dev/null | wc -l`	# Count the available updates
+[ $NPKGS -lt 10 ] && exit 0			# Exit if less than 10 updates avail.
+
+echo "$ICON $NPKGS"
+echo "$ICON $NPKGS"
+echo "#FF8000"

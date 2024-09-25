@@ -1,0 +1,73 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#command=/usr/libexec/i3blocks/$BLOCK_NAME
+command=~/.config/i3blocks/$BLOCK_NAME
+separator_block_width=20
+separator=false
+markup=none
+
+# Rsync in progress
+#[rsync]
+#signal=9
+
+# Package Updates
+[update]
+interval=360
+
+# Memory usage
+[memory]
+label=MEM
+separator=false
+interval=5
+
+# Thermals
+[thermal]
+label=
+interval=5
+
+# Volume indicator
+#[volume]
+#instance=Master
+#interval=once
+#signal=10
+#markup=pango
+
+# Network interface monitoring
+#TODO: implement
+
+# Battery indicator
+[battery]
+interval=2
+
+# Date
+[date]
+command=date '+%a, %d %b %Y'
+interval=5
+
+# Time
+[time]
+command=echo "<span weight=\"bold\">`date '+%I:%M:%S'`</span>"
+interval=1
+min_width='HH:MM:SS'
+markup=pango

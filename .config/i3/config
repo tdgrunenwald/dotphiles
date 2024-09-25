@@ -1,0 +1,265 @@
+# ~/.config/i3/config
+
+# Autostart: {{{
+# Set natural scrolling
+exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
+
+# Lock after 10 minutes of inactivity
+exec xautolock -time 10 -locker 'powerctl lock' -secure -detectsleep
+# }}}
+
+# Xresources: {{{
+# set_from_resource [var name] [resource name] [default/fallback]
+set_from_resource $red             color1   "#ac4142"
+set_from_resource $bright_red      color9   "#ac4142"
+
+set_from_resource $green           color2   "#90a959"
+set_from_resource $bright_green    color10  "#90a959"
+
+set_from_resource $yellow          color3   "#f4bf75"
+set_from_resource $bright_yellow   color11  "#f4bf75"
+
+set_from_resource $blue            color4   "#6a9fb5"
+set_from_resource $bright_blue     color12  "#6a9fb5"
+
+set_from_resource $magenta         color5   "#aa7f9f"
+set_from_resource $bright_magenta  color13  "#aa7f9f"
+
+set_from_resource $cyan            color6   "#75b5aa"
+set_from_resource $bright_cyan     color14  "#75b5aa"
+
+set_from_resource $base00          base00   "#2d2d2d"
+set_from_resource $base01          base01   "#393939"
+set_from_resource $base02          base02   "#515151"
+set_from_resource $base03          base03   "#747369"
+set_from_resource $base04          base04   "#a09f93"
+set_from_resource $base05          base05   "#d3d0c8"
+set_from_resource $base06          base06   "#e8e6df"
+set_from_resource $base07          base07   "#f2f0ec"
+
+set_from_resource $font            i3.font  "pango:FuraCode Nerd Font 10"
+
+set $full_white "#ffffff"
+
+set $border_px 5
+# }}}
+
+# Window Visual Settings: {{{
+# set title bar font
+font $font
+
+# disable window titles
+for_window [class="^.*"] border pixel $border_px
+
+# set default gaps
+#gaps inner 20
+
+# set window colors
+# class                  title border   title background  title text   indicator      window border
+client.focused           $base03        $base03           $base07      $blue          $base03
+client.focused_inactive  $base02        $base02           $base06      $base02        $base02
+client.unfocused         $base01        $base01           $base05      $base01        $base01
+client.urgent            $red           $red              $full_white  $red           $red
+client.placeholder       $base00        $base00           $base05      $base01        $base00
+
+client.background $base00
+# }}}
+
+# i3 Bar Settings: {{{
+bar {
+	position bottom
+	status_command i3blocks -c ~/.config/i3blocks/config
+	#status_command i3status
+	font $font
+	colors {
+		background $base01
+		statusline $base05
+		separator  $base05
+		
+		# class            border         body           text
+		focused_workspace  $base03        $base03        $base07
+		active_workspace   $base02        $base02        $base05
+		inactive_workspace $base02        $base02        $base05
+		urgent_workspace   $red           $red           $full_white
+	}
+}
+# }}}
+
+# Window Management: {{{
+# set modifier key
+set $mod Mod4
+
+# set modifier for dragging floating windows with the mouse
+floating_modifier $mod
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# resize window with mod+Alt (Mod1 = Alt)
+bindsym $mod+Mod1+h resize shrink width 10 px or 10 ppt
+bindsym $mod+Mod1+j resize shrink height 10 px or 10 ppt
+bindsym $mod+Mod1+k resize grow height 10 px or 10 ppt
+bindsym $mod+Mod1+l resize grow width 10 px or 10 ppt
+
+# resize outer gaps
+#bindsym $mod+Shift+o gaps outer all plus 5
+#bindsym $mod+o gaps outer all minus 5
+
+# resize inner gaps
+#bindsym $mod+Shift+i gaps inner all plus 5
+#bindsym $mod+i gaps inner all minus 5
+
+# split in horizontal orientation
+# consistent with the way a horizontal window split in vim is done
+bindsym $mod+Shift+v split v
+
+# split in vertical orientation
+# consistent with the way a vertical window split in vim is done
+bindsym $mod+v split h 
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+Shift+a focus parent
+
+# focus the child container
+bindsym $mod+a focus child
+
+# kill focused window
+bindsym $mod+Shift+q kill
+# }}}
+
+# Workspaces: {{{
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+# }}}
+
+# Scratchpads: {{{
+bindsym $mod+Shift+s move scratchpad
+bindsym $mod+s scratchpad show
+# }}}
+
+# Modes: {{{
+# a system control mode for power management
+set $mode_system "system (e)xit, (l)ock, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown"
+mode $mode_system {
+	bindsym e exec --no-startup-id powerctl logout, mode "default"
+	bindsym l exec --no-startup-id powerctl lock, mode "default"
+	bindsym s exec --no-startup-id powerctl suspend, mode "default" 
+	bindsym h exec --no-startup-id powerctl hibernate, mode "default"
+	bindsym r exec --no-startup-id powerctl reboot
+	bindsym Shift+s exec --no-startup-id powerctl shutdown
+
+	# return to default mode
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode $mode_system
+
+set $mode_layout "layout (s)tacked, (t)abbed, s(p)lit, e(x)it"
+mode $mode_layout {
+	bindsym s layout stacking
+	bindsym t layout tabbed
+	bindsym p layout toggle split
+	bindsym x mode "default"
+}
+bindsym $mod+Shift+o mode $mode_layout
+# }}}
+
+# Default Programs: {{{
+set $term           --no-startup-id kitty
+set $browser        firefox
+# }}}
+
+# Program Bindings: {{{
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# start a terminal
+bindsym $mod+Return exec $term
+
+# start browser
+bindsym $mod+b exec $browser
+# }}}
+
+# Media Keys: {{{
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+bindsym XF86MonBrightnessUp exec --no-startup-id light -s"sysfs/backlight/intel_backlight" -A 20
+bindsym XF86MonBrightnessDown exec --no-startup-id light -s"sysfs/backlight/intel_backlight" -U 20
+
+bindsym Print exec --no-startup-id flameshot gui -c -p "$HOME/Pictures/Screenshots/"
+# }}}
+
+# Dmenu: {{{
+set $dmenu_run      --no-startup-id dmenu_run -p Bin -fn FuraCode\ Nerd\ Font:pixelsize=12
+set $dmenu_desktop  --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -p Apps -fn FuraCode\ Nerd\ Font:pixelsize=12"
+set $dmenu_pass     --no-startup-id passmenu -i -p Pass -fn FuraCode\ Nerd\ Font:pixelsize=12
+set $dmenu_unicode  --no-startup-id dmenu-unicode -i -l 20
+
+# all executables
+bindsym $mod+r exec $dmenu_run
+
+# only .desktop files
+bindsym $mod+d exec $dmenu_desktop
+
+# password manager
+bindsym $mod+p exec $dmenu_pass
+
+# unicode icon menu
+bindsym $mod+u exec $dmenu_unicode
+# }}}

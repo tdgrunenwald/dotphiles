@@ -1,0 +1,5 @@
+#!/bin/sh
+TEMP=`acpi -t | awk '{ printf "%g\n", $4 | "sort" }' | tail -n 1`
+[ $TEMP -gt 70 ] && echo "$TEMP℃\n$TEMP℃\n#FF8000"
+[ $TEMP -gt 90 ] && echo "$TEMP℃\n$TEMP℃\n#FF5500"
+exit 0

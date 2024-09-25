@@ -1,0 +1,39 @@
+# ~/.inputrc
+$include /etc/inputrc
+
+# Disable terminal bell
+set bell-style none
+
+# Colored and case insensitive auto-completion
+set colored-completion-prefix on
+set colored-stats on
+set completion-ignore-case on
+set completion-map-case on
+
+# Set vi key bindings
+set editing-mode vi
+set show-mode-in-prompt on
+set vi-ins-mode-string ➜
+set vi-cmd-mode-string :
+
+# Custom insert mode bindings
+set keymap vi-insert
+	Control-l: clear-screen
+	Control-a: beginning-of-line
+	Control-e: end-of-line
+
+# Don't interpret pasted characters as commands
+set enable-bracketed-paste on
+
+# Don't duplicate chars that are already typed when doing completion
+set skip-completed-text on
+
+# Don't wrap lines that are too long, scroll horizontally instead
+#set horizontal-scroll-mode on
+
+# Insert slash after auto-completing dirs
+set mark-directories on
+set mark-symlinked-directories on
+
+# Show all matches immediately, don't bell
+set show-all-if-ambiguous on

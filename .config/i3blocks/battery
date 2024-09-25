@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# battery status script for i3blocks
+#
+#B_EMPTY=""
+#B_10=""
+#B_20=""
+#B_30=""
+#B_40=""
+#B_50=""
+#B_60=""
+#B_70=""
+#B_80=""
+#B_90=""
+#B_FULL=""
+#B_CHRG=""
+#B_ALERT=""
+B_EMPTY=""
+B_10=""
+B_20=""
+B_30=""
+B_40=""
+B_50=""
+B_60=""
+B_70=""
+B_80=""
+B_90=""
+B_FULL=""
+B_CHRG=""
+B_ALERT="!"
+ACPI=`acpi -b | grep -v "rate information unavailable"`
+STATUS=`echo $ACPI | grep -o 'Charging' -`
+CHRG=`echo $ACPI | grep -E -o '[0-9]*%' -`
+
+ICON=$B_FULL
+[[ ${CHRG%?} -lt 100 ]] && ICON=$B_90
+[[ ${CHRG%?} -lt 90 ]] && ICON=$B_80
+[[ ${CHRG%?} -lt 80 ]] && ICON=$B_70
+[[ ${CHRG%?} -lt 70 ]] && ICON=$B_60
+[[ ${CHRG%?} -lt 60 ]] && ICON=$B_50
+[[ ${CHRG%?} -lt 50 ]] && ICON=$B_40
+[[ ${CHRG%?} -lt 40 ]] && ICON=$B_30
+[[ ${CHRG%?} -lt 30 ]] && ICON=$B_20
+[[ ${CHRG%?} -lt 20 ]] && ICON=$B_10
+[[ ${CHRG%?} -lt 10 ]] && ICON=$B_EMPTY
+[[ $STATUS == "Charging" ]] && ICON=$B_CHRG
+
+echo "$ICON   $CHRG" # full text
+echo "$ICON   $CHRG" # short text
+[ ${CHRG%?} -le 20 ] && COLOR="#FF8000" # text color
+[ ${CHRG%?} -le 10 ] && COLOR="#FF5500" # text color
+[ $COLOR != "" ] && echo $COLOR
+exit 0
