@@ -5,7 +5,7 @@
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
 
 # Lock after 10 minutes of inactivity
-exec xautolock -time 10 -locker 'powerctl lock' -secure -detectsleep
+exec --no-startup-id xautolock -time 10 -locker 'powerctl lock' -secure -detectsleep
 # }}}
 
 # Xresources: {{{
