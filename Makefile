@@ -13,6 +13,7 @@ CONFIG_FILES = \
 	$(CONFIG_DIR)/i3 \
 	$(CONFIG_DIR)/i3blocks\
 	$(CONFIG_DIR)/nvim \
+	$(CONFIG_DIR)/picom \
 
 $(INSTALL_DIR):
 	mkdir -p $(INSTALL_DIR)
@@ -21,10 +22,10 @@ $(CONFIG_DIR):
 	mkdir -p $(CONFIG_DIR)
 
 $(INSTALL_DIR)/.%: .% $(INSTALL_DIR)
-	ln -bfs $(PWD)/$< $@
+	ln -fs $(PWD)/$< $@
 
 $(CONFIG_DIR)/%: .config/% $(CONFIG_DIR)
-	ln -bfs $(PWD)/$< $@
+	ln -fs $(PWD)/$< $@
 
 install: $(FILES) $(CONFIG_FILES)
 	git submodule update --init

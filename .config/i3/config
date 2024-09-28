@@ -6,6 +6,9 @@ exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling
 
 # Lock after 10 minutes of inactivity
 exec --no-startup-id xautolock -time 10 -locker 'powerctl lock' -secure -detectsleep
+
+# start compositor
+exec --no-startup-id picom --daemon
 # }}}
 
 # Xresources: {{{
@@ -49,10 +52,12 @@ set $border_px 5
 font $font
 
 # disable window titles
-for_window [class="^.*"] border pixel $border_px
+#for_window [class="^.*"] border pixel $border_px # <- old method
+default_border none
+default_floating_border none
 
 # set default gaps
-#gaps inner 20
+gaps inner 20
 
 # set window colors
 # class                  title border   title background  title text   indicator      window border
@@ -186,6 +191,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Scratchpads: {{{
 bindsym $mod+Shift+s move scratchpad
 bindsym $mod+s scratchpad show
+bindsym $mod+w sticky toggle
 # }}}
 
 # Modes: {{{
