@@ -9,6 +9,15 @@ exec --no-startup-id xautolock -time 10 -locker 'powerctl lock' -secure -detects
 
 # start compositor
 exec --no-startup-id picom --daemon
+
+# restore desktop background
+exec --no-startup-id nitrogen --restore
+
+# flash window on selection change
+exec_always --no-startup-id flashfocus
+
+# load display layout profile
+exec_always --no-startup-id autorandr --change
 # }}}
 
 # Xresources: {{{
@@ -134,6 +143,9 @@ bindsym $mod+Mod1+l resize grow width 10 px or 10 ppt
 # resize inner gaps
 #bindsym $mod+Shift+i gaps inner all plus 5
 #bindsym $mod+i gaps inner all minus 5
+
+# flash currently selected window
+bindsym $mod+n exec --no-startup-id flash_window
 
 # split in horizontal orientation
 # consistent with the way a horizontal window split in vim is done
