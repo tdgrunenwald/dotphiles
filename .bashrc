@@ -79,6 +79,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
+function psof {
+	# Get full command line of process for a given PID
+	# Effectively inverse of `pidof`
+	ps -p $1 -o args=
+}
+
 export PATH=$PATH:/opt/nrf/bin:/opt/affine:$HOME/go/bin
 export BLEAK_DBUS_AUTH_UID=$(dbus-uuidgen)
 
