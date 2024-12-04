@@ -11,7 +11,7 @@ exec --no-startup-id xautolock -time 10 -locker 'powerctl lock' -secure -detects
 exec --no-startup-id picom --daemon
 
 # restore desktop background
-exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id nitrogen --restore
 
 # flash window on selection change
 exec_always --no-startup-id flashfocus
